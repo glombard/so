@@ -5,7 +5,11 @@ Run the unit tests:
 
 	$ ./gradlew :app:testDebug
 
-This results in the following NPE exception in the `usesMessageFromProvider` unit test:
+This results in a NPE exception in the `usesMessageFromProvider` unit test at the point we `create()` the activity.
+
+If I remove the `withApplication` bit, then the test runs OK (i.e. no exceptions) and correctly fails on the assert as I'd expect... So it's clearly the `withApplication` bit that's causing the problem.
+
+Full stack trace:
 
 	java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
 		at org.robolectric.internal.ReflectionHelpers.callStaticMethodReflectively(ReflectionHelpers.java:83)
