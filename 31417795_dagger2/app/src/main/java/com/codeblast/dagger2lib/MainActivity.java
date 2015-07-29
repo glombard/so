@@ -5,8 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
 
+    @Inject
     SomeClass someClass;
 
     @Override
