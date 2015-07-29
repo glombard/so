@@ -13,6 +13,10 @@ public class SomeClass {
     @Inject
     MyManager myManager;
 
+    @Inject
+    public SomeClass() {
+    }
+
     public void useDependency() {
         assert myManager != null;
         Log.d(TAG, "Doing something with myManager...");

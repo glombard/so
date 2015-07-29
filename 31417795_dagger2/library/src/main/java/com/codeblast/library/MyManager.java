@@ -11,7 +11,8 @@ public class MyManager {
     private static final String TAG = "MyManager";
 
     @Inject
-    public MyManager() {
+    public MyManager(MyUtility utility) {
         Log.d(TAG, "Creating MyManager");
+        utility.doSomething();
     }
 }

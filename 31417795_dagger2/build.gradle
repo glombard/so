@@ -16,4 +16,21 @@ allprojects {
     repositories {
         jcenter()
     }
+
+    // Configure the generated dagger code to be visible in Android Studio:
+    afterEvaluate { project ->
+        def isApp = project.plugins.hasPlugin("android")
+        def isLib = project.plugins.hasPlugin("android-library")
+        if (isApp || isLib) {
+            def variants = isApp ? android.applicationVariants : android.libraryVariants
+            variants.all { variant ->
+                def generatedSrc = new File("$project.buildDir/generated/source/dagger/$variant.dirName")
+                variant.addJavaSourceFoldersToModel(generatedSrc);
+                variant.javaCompile.options.compilerArgs += ['-s', generatedSrc]
+                variant.javaCompile.doFirst {
+                    generatedSrc.mkdirs()
+                }
+            }
+        }
+    }
 }
