@@ -7,7 +7,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(library = true, injects = PhotoManager.class)
+@Module(library = true)
 public class AndroidModule {
 
     private final TestApp mApplication;

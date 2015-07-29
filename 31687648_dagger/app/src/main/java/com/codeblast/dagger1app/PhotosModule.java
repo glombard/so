@@ -5,12 +5,12 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(injects = PhotosFragment.class)
+@Module(injects = PhotosFragment.class, includes = AndroidModule.class)
 public class PhotosModule {
 
     @Provides
     @Singleton
-    PhotoManager providePhotoManager() {
-        return new PhotoManager();
+    PhotoManager providePhotoManager(DbManager dbManager) {
+        return new PhotoManager(dbManager);
     }
 }
