@@ -1,16 +1,27 @@
 package com.codeblast.daggergenerics;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import javax.inject.Inject;
+
+import dagger.ObjectGraph;
+
+public class MainActivity extends AppCompatActivity implements BaseView {
+
+    @Inject
+    MainPresenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ObjectGraph.create(new MainModule(this)).inject(this);
+        mPresenter.showLoadingIndicator();
     }
 
     @Override
@@ -33,5 +44,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showLoading() {
+        Toast.makeText(this, "Loading...", Toast.LENGTH_LONG).show();
     }
 }
