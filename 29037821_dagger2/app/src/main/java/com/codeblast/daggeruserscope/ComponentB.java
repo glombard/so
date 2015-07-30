@@ -2,7 +2,7 @@ package com.codeblast.daggeruserscope;
 
 import dagger.Component;
 
-@Component(modules={ModuleB.class})
+@Component(modules={ModuleB.class}, dependencies = ComponentA.class)
 @UserScope
 public interface ComponentB {
     User getUser();

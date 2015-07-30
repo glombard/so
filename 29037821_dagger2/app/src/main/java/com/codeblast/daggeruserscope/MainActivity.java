@@ -21,13 +21,20 @@ public class MainActivity extends AppCompatActivity {
 
     private ComponentB mComponentB;
 
+    private User mUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mUser = new User();
 
-        getComponentA().inject(this);
+        getComponentA().inject(this); // Note: it isn't actually necessary to inject both components...
         getComponentB().inject(this);
+
+        if (bus == null || userManager == null) {
+            throw new IllegalStateException("members not injected correctly?");
+        }
     }
 
     @Override
@@ -53,10 +60,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public ComponentA getComponentA() {
+        if (mComponentA == null) {
+            mComponentA = DaggerComponentA.create();
+        }
         return mComponentA;
     }
 
     public ComponentB getComponentB() {
+        if (mComponentB == null) {
+            mComponentB = DaggerComponentB.builder()
+                    .componentA(getComponentA())
+                    .moduleB(new ModuleB(mUser))
+                    .build();
+        }
         return mComponentB;
     }
 }
