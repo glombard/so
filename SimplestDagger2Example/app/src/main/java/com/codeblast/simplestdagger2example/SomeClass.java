@@ -7,6 +7,9 @@ public class SomeClass {
     @Inject
     MyManager myManager;
 
+    @Inject
+    public SomeClass() {}
+
     public void doSomething() {
         myManager.doSomething();
     }
