@@ -1,11 +1,16 @@
 package com.codeblast.simplestdagger2example;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import javax.inject.Inject;
+
 public class MainActivity extends AppCompatActivity {
+
+    @Inject
+    SomeClass mSomeClass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,4 +40,3 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
