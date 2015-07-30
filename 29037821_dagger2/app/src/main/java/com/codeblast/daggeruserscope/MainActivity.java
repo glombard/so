@@ -1,18 +1,33 @@
 package com.codeblast.daggeruserscope;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import javax.inject.Inject;
 
 // see: Dagger v2: Inject 2 different scopes into one object - http://stackoverflow.com/questions/29037821/
 
 public class MainActivity extends AppCompatActivity {
 
+    @Inject
+    Bus bus;
+
+    @Inject
+    UserManager userManager;
+
+    private ComponentA mComponentA;
+
+    private ComponentB mComponentB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        getComponentA().inject(this);
+        getComponentB().inject(this);
     }
 
     @Override
@@ -35,5 +50,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public ComponentA getComponentA() {
+        return mComponentA;
+    }
+
+    public ComponentB getComponentB() {
+        return mComponentB;
     }
 }
