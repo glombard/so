@@ -67,6 +67,7 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
         button2.setOnClickListener(this);
     }
 
+    @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
@@ -74,16 +75,19 @@ public class MainActivity extends ActionBarActivity implements SensorEventListen
      * onResume() registers the accelerometer for listening
      * to the events
      */
+    @Override
     protected void onResume() {
         super.onResume();
         mSensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
+    @Override
     protected void onPause() {
         super.onPause();
         mSensorManager.unregisterListener(this);
     }
 
+    @Override
     public void onSensorChanged(SensorEvent event) {
         //if sensor status result is unreliable return
         if (event.accuracy == SensorManager.SENSOR_STATUS_UNRELIABLE) {
