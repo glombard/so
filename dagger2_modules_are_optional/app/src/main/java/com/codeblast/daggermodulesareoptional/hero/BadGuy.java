@@ -3,6 +3,8 @@ package com.codeblast.daggermodulesareoptional.hero;
 import com.codeblast.daggermodulesareoptional.hero.attack.SuperPower;
 import com.codeblast.daggermodulesareoptional.util.RandomNumberSupplier;
 
+import javax.inject.Inject;
+
 public class BadGuy {
 
     private static int sNumber = 1;
@@ -11,6 +13,7 @@ public class BadGuy {
 
     private int mStrength;
 
+    @Inject
     public BadGuy(RandomNumberSupplier random) {
         mStrength = 8 + random.nextInt(8);
         mId = sNumber++;

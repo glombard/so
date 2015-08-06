@@ -3,12 +3,17 @@ package com.codeblast.daggermodulesareoptional.util;
 import java.util.ArrayDeque;
 import java.util.Queue;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
 public class LogMessageJoiner {
 
     private static final int MAX_LINES = 8;
 
     private Queue<String> mLogMessages;
 
+    @Inject
     public LogMessageJoiner() {
         mLogMessages = new ArrayDeque<>();
     }

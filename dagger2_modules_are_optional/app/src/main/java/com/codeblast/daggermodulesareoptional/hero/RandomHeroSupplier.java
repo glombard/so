@@ -1,7 +1,8 @@
 package com.codeblast.daggermodulesareoptional.hero;
 
-import com.codeblast.daggermodulesareoptional.util.EventReporter;
 import com.codeblast.daggermodulesareoptional.util.RandomNumberSupplier;
+
+import javax.inject.Inject;
 
 public class RandomHeroSupplier {
 
@@ -13,10 +14,12 @@ public class RandomHeroSupplier {
 
     private final RandomNumberSupplier mRandom;
 
-    public RandomHeroSupplier(EventReporter eventReporter, RandomNumberSupplier randomNumberSupplier) {
-        mBlackWidow = new BlackWidow(eventReporter);
-        mCaptainAmerica = new CaptainAmerica(eventReporter);
-        mIronMan = new IronMan(eventReporter);
+    @Inject
+    public RandomHeroSupplier(BlackWidow blackWidow, CaptainAmerica captainAmerica, IronMan ironMan,
+            RandomNumberSupplier randomNumberSupplier) {
+        mBlackWidow = blackWidow;
+        mCaptainAmerica = captainAmerica;
+        mIronMan = ironMan;
         mRandom = randomNumberSupplier;
     }
 

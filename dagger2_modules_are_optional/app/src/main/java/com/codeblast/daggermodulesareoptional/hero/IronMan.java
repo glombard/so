@@ -3,7 +3,8 @@ package com.codeblast.daggermodulesareoptional.hero;
 import com.codeblast.daggermodulesareoptional.hero.attack.AttackCoordinator;
 import com.codeblast.daggermodulesareoptional.hero.attack.RepulsorRay;
 import com.codeblast.daggermodulesareoptional.hero.attack.SuperPower;
-import com.codeblast.daggermodulesareoptional.util.EventReporter;
+
+import javax.inject.Inject;
 
 public class IronMan implements SuperHero {
 
@@ -11,9 +12,10 @@ public class IronMan implements SuperHero {
 
     private final AttackCoordinator mAttackCoordinator;
 
-    public IronMan(EventReporter eventReporter) {
-        mRepulsorRay = new RepulsorRay();
-        mAttackCoordinator = new AttackCoordinator(eventReporter);
+    @Inject
+    public IronMan(RepulsorRay repulsorRay, AttackCoordinator attackCoordinator) {
+        mRepulsorRay = repulsorRay;
+        mAttackCoordinator = attackCoordinator;
     }
 
     @Override

@@ -4,10 +4,13 @@ import com.codeblast.daggermodulesareoptional.hero.BadGuy;
 import com.codeblast.daggermodulesareoptional.hero.SuperHero;
 import com.codeblast.daggermodulesareoptional.util.EventReporter;
 
+import javax.inject.Inject;
+
 public class AttackCoordinator {
 
     private final EventReporter mEventReporter;
 
+    @Inject
     public AttackCoordinator(EventReporter eventReporter) {
         mEventReporter = eventReporter;
     }

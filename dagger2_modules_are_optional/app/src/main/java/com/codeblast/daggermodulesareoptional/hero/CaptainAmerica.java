@@ -3,7 +3,8 @@ package com.codeblast.daggermodulesareoptional.hero;
 import com.codeblast.daggermodulesareoptional.hero.attack.AttackCoordinator;
 import com.codeblast.daggermodulesareoptional.hero.attack.HandToHandCombat;
 import com.codeblast.daggermodulesareoptional.hero.attack.SuperPower;
-import com.codeblast.daggermodulesareoptional.util.EventReporter;
+
+import javax.inject.Inject;
 
 public class CaptainAmerica implements SuperHero {
 
@@ -11,9 +12,10 @@ public class CaptainAmerica implements SuperHero {
 
     private final HandToHandCombat mHandToHandCombat;
 
-    public CaptainAmerica(EventReporter eventReporter) {
-        mHandToHandCombat = new HandToHandCombat();
-        mAttackCoordinator = new AttackCoordinator(eventReporter);
+    @Inject
+    public CaptainAmerica(HandToHandCombat handToHandCombat, AttackCoordinator attackCoordinator) {
+        mHandToHandCombat = handToHandCombat;
+        mAttackCoordinator = attackCoordinator;
     }
 
     @Override

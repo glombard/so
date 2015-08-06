@@ -3,7 +3,8 @@ package com.codeblast.daggermodulesareoptional.hero;
 import com.codeblast.daggermodulesareoptional.hero.attack.AttackCoordinator;
 import com.codeblast.daggermodulesareoptional.hero.attack.SuperPower;
 import com.codeblast.daggermodulesareoptional.hero.attack.WidowBite;
-import com.codeblast.daggermodulesareoptional.util.EventReporter;
+
+import javax.inject.Inject;
 
 public class BlackWidow implements SuperHero {
 
@@ -11,9 +12,10 @@ public class BlackWidow implements SuperHero {
 
     private final WidowBite mWidowBite;
 
-    public BlackWidow(EventReporter eventReporter) {
-        mWidowBite = new WidowBite();
-        mAttackCoordinator = new AttackCoordinator(eventReporter);
+    @Inject
+    public BlackWidow(WidowBite widowBite, AttackCoordinator attackCoordinator) {
+        mWidowBite = widowBite;
+        mAttackCoordinator = attackCoordinator;
     }
 
     @Override

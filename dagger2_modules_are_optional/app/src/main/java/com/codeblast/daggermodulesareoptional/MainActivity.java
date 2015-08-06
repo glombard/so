@@ -6,10 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.codeblast.daggermodulesareoptional.hero.Battle;
+import com.codeblast.daggermodulesareoptional.hero.DaggerAvengersBattleComponent;
+import com.codeblast.daggermodulesareoptional.util.DaggerUtilComponent;
 import com.codeblast.daggermodulesareoptional.util.EventReporter;
 import com.codeblast.daggermodulesareoptional.util.LogMessageJoiner;
 
 import java.util.concurrent.TimeUnit;
+
+import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscription;
@@ -19,23 +23,37 @@ import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Subscription mTimerSubscription;
+    // This is a completely contrived class hierarchy, but the point here is to demonstrate
+    // the gratuitous injectfest! Inject all the things! And note: only two Dagger 2 Components -
+    // one for the util singletons, and one for the hero stuff. No Dagger modules needed at all.
+    @Inject
+    Battle mAvengersBattle;
 
-    private Battle mAvengersBattle;
+    @Inject
+    LogMessageJoiner mLogJoiner;
+
+    @Inject
+    EventReporter mEventReporter;
+
+    private Subscription mTimerSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final LogMessageJoiner log = new LogMessageJoiner();
-        final EventReporter eventReporter = new EventReporter();
-        eventReporter.setListener(new EventReporter.EventListener() {
+
+        // Inject all the things!
+        DaggerAvengersBattleComponent.builder()
+                .utilComponent(DaggerUtilComponent.create())
+                .build()
+                .initialize(this);
+
+        mEventReporter.setListener(new EventReporter.EventListener() {
             @Override
             public void onMessage(String message) {
-                ((TextView) findViewById(R.id.message)).setText(log.getLogText(message));
+                ((TextView) findViewById(R.id.message)).setText(mLogJoiner.getLogText(message));
             }
         });
-        mAvengersBattle = new Battle(eventReporter);
     }
 
     @Override
