@@ -12,4 +12,5 @@ Some of my recent StackOverflow answers.
 
 My previous StackOverflow question:
 
+- [31932871_rxjava_close_resources](31932871_rxjava_close_resources/) -- [RxJava: closing a resource after every subscriber handled it](http://stackoverflow.com/questions/31932871/rxjava-closing-a-resource-after-every-subscriber-handled-it)
 - [RobolectricWithApplication](RobolectricWithApplication/) -- [Why does Robolectric 2.4 ActivityController.withApplication() cause NullPointerException?](http://stackoverflow.com/questions/28825317/)
